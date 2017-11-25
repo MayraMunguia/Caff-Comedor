@@ -1,0 +1,114 @@
+{% extends "coolshop/base.html" %}
+{% load static %}
+
+{% block title %}
+{% if category %}{{ category.name }}{% else %}Products{% endif %}
+
+
+
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+	<!--<div>
+	<h3>Categories</h3>
+	<ul>
+	<li {% if not category %}class="selected"{% endif %}>
+<a href="{% url 'shop:product_list' %}">All</a>
+</li>
+{% for c in categories %}
+	<li {% if category.slug == c.slug %}class="selected"{% endif%}>
+	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+</li>
+{% endfor %}
+</ul>
+</div> -->
+
+<div id="sidebar" class="w3-panel w3-border-right w3-border-blue">
+	<h1>Orden</h1>
+	<br>
+	<table class="w3-card-4" >
+		<thead>
+			<tr>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Eliminar?</th>
+				<th>Precio Unitario</th>
+				<th>Precio</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in cart %}
+			 {% with product=item.product %}
+			<tr>
+				<td>{{ product.name }}</td>
+				<td>
+					<form action="{% url 'cart:cart_add' product.id %}" method="post">
+						{{ item.update_quantity_form.quantity }}
+						{{ item.update_quantity_form.update }}
+						<input type="submit" value="update">
+						{% csrf_token %}
+
+<!--<div class="input-group plus-minus-input">
+  <input class="input-group-field" type="number" name="quantity" value="0" method="post">
+</div>
+-->	
+					</form>
+				</td>
+				<td><a href="{% url 'cart:cart_remove' product.id %}"><center>x</center></a></td>
+				<td class="num"><center>${{ item.price }}</center></td>
+				<td class="num">${{ item.total_price }}</td>
+			</tr>
+			 {% endwith %}
+			{% endfor %}
+			<tr class="total">
+				<td>Total</td>
+				<td colspan="3"></td>
+				<td class="num">${{ cart.get_total_price }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<p class="text-right">	
+		<a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
+	</p>
+
+
+</div>
+<div id="main" class="product-list">
+<h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}</h1>
+<div id="Camb">
+	
+	<!--<li {% if not category %}class="selected"{% endif %}>
+<a href="{% url 'shop:product_list' %}">All</a>
+</li>-->
+{% for c in categories %}
+	<div class="item" >	
+		<a href="{{ c.get_absolute_url }}">
+		<img src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+	 <!---
+	 <input type="button" value="Cambiar" onClick="cambiar();">
+	-->
+	<button value="Cambiar" onClick="Cambiar();" class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
+	<a href="{{ c.get_absolute_url }}">
+	{{ c.name }}</a><br>
+</input>
+</button>
+	</div>
+{% endfor %}
+
+
+
+</div>
+{% for product in products %}
+	<div class="item">
+		<a href="{{ product.get_absolute_url }}">
+		<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+		</a>
+		<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+		${{ product.price }}
+	</div>
+{% endfor %}
+</div>
+{% endblock %}
