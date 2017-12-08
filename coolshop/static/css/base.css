@@ -40,6 +40,10 @@ a.button.light {
 .text-right {
     text-align:right;
 }
+.hidden {
+  display: none;
+  visibility: hidden;
+} 
 
 table {
     width:100%;
@@ -183,8 +187,8 @@ ul.errorlist {
 
 #main {
     float:right;
-    width: 60%;
-    margin-left:-100px; 
+    width: 59%;
+    margin-left:-220px; 
     overflow:hidden;
 }
 

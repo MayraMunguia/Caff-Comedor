@@ -79,7 +79,6 @@
 <div id="main" class="product-list">
 <h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}</h1>
 <div id="Camb">
-	
 	<!--<li {% if not category %}class="selected"{% endif %}>
 <a href="{% url 'shop:product_list' %}">All</a>
 </li>-->
@@ -90,10 +89,8 @@
 	 <!---
 	 <input type="button" value="Cambiar" onClick="cambiar();">
 	-->
-	<button value="Cambiar" onClick="Cambiar();" class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
-	<a href="{{ c.get_absolute_url }}">
-	{{ c.name }}</a><br>
-</input>
+	<button value="button" class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
+	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a><br>
 </button>
 	</div>
 {% endfor %}
@@ -101,6 +98,7 @@
 
 
 </div>
+<div id= productos style="visibility: hidden">
 {% for product in products %}
 	<div class="item">
 		<a href="{{ product.get_absolute_url }}">
@@ -110,5 +108,7 @@
 		${{ product.price }}
 	</div>
 {% endfor %}
+</div>
+
 </div>
 {% endblock %}
