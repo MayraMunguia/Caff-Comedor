@@ -26,7 +26,7 @@
 </ul>
 </div> -->
 
-<div id="sidebar" class="w3-panel w3-border-right w3-border-blue">
+<div id="sidebar" class="w3-panel w3-border-right w3-border-red">
 	<h1>Orden</h1>
 	<br>
 	<table class="w3-card-4" >
@@ -77,6 +77,7 @@
 
 </div>
 <div id="main" class="product-list">
+	<br>
 <h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}</h1>
 <div id="Camb">
 	<!--<li {% if not category %}class="selected"{% endif %}>
@@ -104,11 +105,28 @@
 		<a href="{{ product.get_absolute_url }}">
 		<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
 		</a>
-		<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+		<a href="#openModal">{{ product.name }}</a><br>
 		${{ product.price }}
 	</div>
 {% endfor %}
 </div>
+
+<div id="openModal" class="modalDialog">
+	<a href="#close" title="Close" class="close">X</a>
+	<div class="product-detail">
+		<img src="{% if product.image %}{{ product.image.url }}{% else %} {% static 'img/no_image.png' %}{% endif %}">
+		<h1>{{ product.name }}</h1>
+		<h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
+<p class="price">${{ product.price }}</p>
+<form action="" method="post">
+	{{ cart_product_form }}
+	{% csrf_token %}
+<input type="submit" value="Add to cart">
+</form>
+	{{ product.description|linebreaks }}
+</div>
+
+</div>	
 
 </div>
 {% endblock %}
