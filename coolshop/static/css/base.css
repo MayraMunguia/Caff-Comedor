@@ -376,3 +376,27 @@ ul.errorlist {
 }
 
 .close:hover { background: #00d9ff; }   
+
+
+#numericcontrol a
+{
+    cursor:pointer;
+    background:#bb5959;
+    height:21px;
+    display:inline-block;
+    margin:0px;
+    padding:0px 10px;
+    float:left;
+    line-height:18px;
+    font-size:14px;
+    color:#fff;
+    text-decoration:none;
+}
+#numericcontrol input[type="text"]
+{
+    border:solid 1px #1dac2e;
+    height:21px;
+    float:left;
+    width:50px;
+    padding:1px 5px;
+}
