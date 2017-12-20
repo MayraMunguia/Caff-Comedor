@@ -26,66 +26,18 @@
 </ul>
 </div> -->
 
-<div id="sidebar" class="w3-panel w3-border-right w3-border-red">
-		<h1>Orden</h1>
-	<br>
-	<table class="w3-card-4" >
-		<thead>
-			<tr >
-				<th>Producto</th>
-				<th style="width: 200%;">Cantidad</th>
-				<th>Eliminar?</th>
-				<th>Precio Unitario</th>
-				<th>Precio</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in cart %}
-			 {% with product=item.product %}
-			<tr>
-				<td>{{ product.name }}</td>
-				<td>
-					<form action="{% url 'cart:cart_add' product.id %}" method="post">
-						{{ item.update_quantity_form.quantity }}
-						{{ item.update_quantity_form.update }}
-									<div id="numericcontrol">
-<a class="minus" href="#">-</a><input type="text" value="update">{{ item.update_quantity_form.quantity }}</input><a class="plus" href="#">+</a>
-</div>
-						{% csrf_token %}
-
-
-
-					</form>
-				</td>
-				<td><a href="{% url 'cart:cart_remove' product.id %}"><center>x</center></a></td>
-				<td class="num"><center>${{ item.price }}</center></td>
-				<td class="num">${{ item.total_price }}</td>
-			</tr>
-			 {% endwith %}
-			{% endfor %}
-			<tr class="total">
-				<td>Total</td>
-				<td colspan="3"></td>
-				<td class="num">${{ cart.get_total_price }}</td>
-			</tr>
-		</tbody>
-	</table>
-	<p class="text-right">	
-		<a href="{% url 'orders:order_create' %}" class="button">Checkout</a>
-	</p>
-
 
 </div>
 <div id="main" class="product-list">
 	<br>
-<h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}</h1>
-<div id="Camb">
+<h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}<a href="/"><img id="back" align="right" style="visibility: hidden;padding-right: 20px" src="{% static 'img/back.png' %}"/></a></h1>
 
+<div id="Camb">
 
 {% for c in categories %}
 	<div class="item" >	
 		<a href="{{ c.get_absolute_url }}">
-		<img src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+		<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
 	</a>
 	 <!---
 	 <input type="button" value="Cambiar" onClick="cambiar();">
@@ -106,29 +58,12 @@
 		<a href="{{ product.get_absolute_url }}">
 		<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
 		</a>
-		<a href="#openModal">{{ product.name }}</a><br>
+		<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
 		${{ product.price }}
 	</div>
 {% endfor %}
 </div>
 
-<div id="openModal" class="modalDialog">
-	
-	<div class="product-detail">
-		<a href="#close" title="Close" class="close">X</a>
-		<img src="{% if product.image %}{{ product.image.url }}{% else %} {% static 'img/no_image.png' %}{% endif %}">
-		<h1>{{ product.name }}</h1>
-		<h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-<p class="price">${{ product.price }}</p>
-<form action="" method="post">
-	{{ cart_product_form }}
-	{% csrf_token %}
-<input type="submit" value="Agregar al carrito">
-</form>
-	{{ product.description|linebreaks }}
-</div>
-
-</div>	
 
 </div>
 {% endblock %}

@@ -6,15 +6,37 @@
 {% endblock %}
 
 {% block content %}
+<br>
+<br>
+
+<a href="/alimentos"><img id="back" align="right" style="padding-right: 20px" src="{% static 'img/back.png' %}"/a></a>
+
 	<div class="product-detail">
 		<img src="{% if product.image %}{{ product.image.url }}{% else %} {% static 'img/no_image.png' %}{% endif %}">
 		<h1>{{ product.name }}</h1>
+
 		<h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
 <p class="price">${{ product.price }}</p>
+
+
 <form action="{% url 'cart:cart_add' product.id %}" method="post">
 	{{ cart_product_form }}
 	{% csrf_token %}
-<input type="submit" value="Add to cart">
+<input type="submit" value="Agregar a la orden">
 </form>
+
+
+<form action="{% url 'cart:cart_add' product.id %}" method="post">
+						{{ item.update_quantity_form.quantity }}
+						{{ item.update_quantity_form.update }}
+						{% csrf_token %}
+						<div id="numericcontrol">
+<a class="minus" href="#">-</a><input type="text" /><a class="plus" href="#">+</a>
+<br>
+<input type="submit" value="Agregar a la orden">
+</div>
+	</form>
+
+
 </div>
 {% endblock %}

@@ -8,6 +8,10 @@ $("button").click(function() {
     $("#productos").css('visibility','visible');
 })
 
+$("button").click(function() {
+    $("#back").css('visibility','visible');
+})
+
  $('#numericcontrol input[type="text"]').val("1");
 	$val=$('#numericcontrol input[type="text"]').val();
 	$('#numericcontrol a.plus').click(function(){
