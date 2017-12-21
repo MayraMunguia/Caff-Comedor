@@ -1,29 +1,22 @@
 $(document).ready(function() {
 
-$("button").click(function() {
-    $("#Camb").toggle();
-})
 
-$("button").click(function() {
-    $("#productos").css('visibility','visible');
-})
+var numeric = document.getElementById("the_form");
+numeric.quantity.value = "1";
 
-$("button").click(function() {
-    $("#back").css('visibility','visible');
-})
 
- $('#numericcontrol input[type="text"]').val("1");
-	$val=$('#numericcontrol input[type="text"]').val();
+	$val= numeric.quantity.value;
+	
 	$('#numericcontrol a.plus').click(function(){
 		$val++;
-		$(this).parent('div#numericcontrol').find('input[type="text"]').val($val);
+		numeric.quantity.value = $val;
 	});
 	$('#numericcontrol a.minus').click(function(){
 		
 		if($val>1)
 		{
 		$val--;	
-		$(this).parent('div#numericcontrol').find('input[type="text"]').val($val);
+		numeric.quantity.value = $val;
 		}
 		else
 		{

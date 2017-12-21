@@ -4,55 +4,30 @@
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 
-
-
 {% endblock %}
 
-
 {% block content %}
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-	<!--<div>
-	<h3>Categories</h3>
-	<ul>
-	<li {% if not category %}class="selected"{% endif %}>
-<a href="{% url 'shop:product_list' %}">All</a>
-</li>
-{% for c in categories %}
-	<li {% if category.slug == c.slug %}class="selected"{% endif%}>
-	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
-</li>
-{% endfor %}
-</ul>
-</div> -->
-
 
 </div>
 <div id="main" class="product-list">
 	<br>
-<h1>{% if category %}{{ category.name }}{% else %}Todos los productos{% endif %}<a href="/"><img id="back" align="right" style="visibility: hidden;padding-right: 20px" src="{% static 'img/back.png' %}"/></a></h1>
+<h1>{% if category %}{{ category.name }}{% else %}Seleccione una categoría:{% endif %}<a href="/"><img id="back" align="right" {% if not category %}style="display:none;padding-right:20px"{% else %}style="padding-right:20px;"{% endif %} src="{% static 'img/back.png' %}"/></a></h1>
 
-<div id="Camb">
+
 
 {% for c in categories %}
-	<div class="item" >	
+	<div {% if category %}style="display:none"{% endif%}class="item" >	
 		<a href="{{ c.get_absolute_url }}">
 		<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
 	</a>
-	 <!---
-	 <input type="button" value="Cambiar" onClick="cambiar();">
-	-->
-	<button value="button" class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
+	<button class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
 	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a><br>
 </button>
-
 	</div>
 {% endfor %}
 
 
-
-</div>
-<div id= productos style="visibility: hidden">
+<div id= productos {% if not category %}style="display:none"{% endif%}>
 {% for product in products %}
 	<div class="item">
 		<a href="{{ product.get_absolute_url }}">
