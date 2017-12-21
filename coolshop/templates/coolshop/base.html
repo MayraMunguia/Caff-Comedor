@@ -69,9 +69,12 @@
 			</tr>
 		</tbody>
 	</table>
-	<p class="text-right">	
-		<a href="{% url 'orders:order_create' %}" class="button">Terminar</a>
+	<p class="text-left">	
+		<a href="{% url 'orders:clear_session' %}" class="button">Cancelar Orden</a>
+		<a href="{% url 'orders:order_create' %}" class="button">Enviar Orden</a>
 	</p>
+
+	
 
 
 

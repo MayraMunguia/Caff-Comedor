@@ -1,6 +1,6 @@
 {% extends "coolshop/base.html" %}
 {% load static %}
-
+<link href="{% static 'css/base.css' %}" rel="stylesheet">
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 

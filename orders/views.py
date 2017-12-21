@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
@@ -21,3 +21,10 @@ def order_create(request):
 	else:
 		form = OrderCreateForm()
 	return render(request, 'orders/order/create.html',{'cart':cart, 'form':form})
+
+def clear_session(request):
+	cart = Cart(request)
+	cart.clear()
+
+	return redirect('/')
+	
