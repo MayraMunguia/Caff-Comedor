@@ -5,22 +5,31 @@ class Category(models.Model):
 	name= models.CharField(max_length=200, db_index = True)
 	slug= models.SlugField(max_length=200,db_index=True, unique= True)
 	image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
+	parent = models.ForeignKey('self',blank=True, null=True ,related_name='children')
 
 	class Meta:
+		unique_together = ('slug', 'parent',)
 		ordering = ('name',)
 		verbose_name = 'Category'
 		verbose_name_plural= 'categories'
 
 
 	def __str__	(self):
-			return self.name
+		full_path = [self.name]
+		k = self.parent
+
+		while k is not None:
+			full_path.append(k.name)
+			k = k.parent
+
+		return ' -> '.join(full_path[::-1])
 
 	def get_absolute_url(self):
 		return reverse('shop:product_list_by_category', args=[self.slug])
 
 			
 class Product(models.Model):
-	category = models.ForeignKey(Category, related_name='products')
+	category = models.ForeignKey(Category, related_name='products', null = True, blank = True)
 	name = models.CharField(max_length=200, db_index=True)
 	slug = models.SlugField(max_length=200, db_index=True)
 	image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)

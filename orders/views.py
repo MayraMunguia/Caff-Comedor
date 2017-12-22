@@ -27,4 +27,7 @@ def clear_session(request):
 	cart.clear()
 
 	return redirect('/')
+
+def payment(request):
+	return render(request,'orders/order/payment.html')
 	

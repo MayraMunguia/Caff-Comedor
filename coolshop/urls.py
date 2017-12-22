@@ -10,4 +10,5 @@ urlpatterns = [
 	url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$',
 		views.product_detail,
 		name='product_detail'),
+	
 ]

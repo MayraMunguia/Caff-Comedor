@@ -1,7 +1,5 @@
 {% extends "coolshop/base.html" %}
-
-<link href="{% static 'css/base.css' %}" rel="stylesheet">
-
+{% load static %}
 {% block title %}
 	Pago
 {% endblock %}
@@ -13,11 +11,11 @@
 
 <div>
 	<a href="#" class="button button-blue">
-    <span>Tarjeta Caffenio</span>
+    <span>Tarjeta <img src="{% static 'img/caffenio.png' %}"/></span>
 </a>
-
-<a href="#" class="button button-blue">
-    <span>Efectivo</span>
+<br>
+<a style=" width: 983; height: 161; " href="#" class="button button-blue">
+    <span>Efectivo<img src="{% static 'img/thing.png' %}"/></span>
 </a>
 	
 
