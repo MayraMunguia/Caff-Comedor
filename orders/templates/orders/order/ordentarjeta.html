@@ -1,0 +1,25 @@
+{% extends "coolshop/base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}
+	Checkout
+{% endblock %}
+
+{% block content %}
+
+	<h1>Pago con tarjeta</h1>
+	<h2>Pasa tu tarjeta por el lector...</h2>
+
+
+
+	<form action="." method="post" class="order-form">
+		<h5>Numero de Tarjeta:</h5>
+		{{ form.numerotarjeta |attr:"autofocus"}}
+		<h5>Nombre del empleado:</h5>
+		{{ form.nombre | attr:"readonly"}}
+		<h5>Numero de empleado:</h5>
+		{{form.numeroempleado |attr:"readonly"}}
+		<p><input type="submit" value="Enviar Orden"></p>
+		{% csrf_token %}
+	</form>
+{% endblock %}

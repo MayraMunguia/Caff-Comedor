@@ -10,13 +10,17 @@
 	<h2>Por favor, seleccione la forma de pago que desee.</h2>
 
 <div>
-	<a href="#" class="button button-blue">
+
+	<a href="{% url 'orders:order_create'%}" class="button button-blue">
     <span>Tarjeta <img src="{% static 'img/caffenio.png' %}"/></span>
 </a>
 <br>
 <a style=" width: 983; height: 161; " href="#" class="button button-blue">
     <span>Efectivo<img src="{% static 'img/thing.png' %}"/></span>
 </a>
+
+
+	
 	
 
 </div>
