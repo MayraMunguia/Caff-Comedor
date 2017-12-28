@@ -118,4 +118,5 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 CART_SESSION_ID = 'cart'
+SESSION_COOKIE_AGE = 10
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -6,58 +6,19 @@
 	Checkout
 {% endblock %}
 
-{% block css %}
-
-	<style>
-			.nmpd-grid {border: none; padding: 20px;}
-			.nmpd-grid>tbody>tr>td {border: none;}
-			
-			/* Some custom styling for Bootstrap */
-			.qtyInput {display: block;
-			  width: 100%;
-			  padding: 6px 12px;
-			  color: #555;
-			  background-color: green;
-			  border: 1px solid #ccc;
-			  border-radius: 4px;
-			  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-			  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-			  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-			  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-			  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-			}
-		</style>
-
-
-
-{% endblock %}
-
-
-
-
 {% block content %}
-
 	<h1>Pago en Efectivo</h1>
-
 	<h3>Total a pagar de la orden: <p style=" font-weight: bold;">${{ cart.get_total_price}}</p></h3>
-
 	<h3>¿Con cuanto vas a pagar?</h3>
-
-	<form  action="." method="post" class="order-form">
+	<form  action="." method="post" class="order-form" onsubmit="return checkvalue(this)">
 		<br>
 		{{ form.Pago |attr:"autofocus"}}
-		<br>
 		<br>
 		<br>
 		<p><input type="submit" value="Enviar Orden"></p>
 		{% csrf_token %}
 	</form>
-
-
 {% endblock %}
-
-
-
 
 {% block js %}
 <script type="text/javascript">
@@ -75,6 +36,15 @@
 				$('#id_Pago').numpad();
 				$('#text-basic').numpad();
 			});
+
+			function checkvalue() { 
+    			var mystring = document.getElementById('id_Pago').value; 
+    			if(!mystring.match(/\S/)) {
+        			alert ('Por favor ingrese la cantidad con la que pagará.');
+        			return false;
+    			} else 
+        			return true;
+    			}
 		</script>
 	
 {% endblock %}

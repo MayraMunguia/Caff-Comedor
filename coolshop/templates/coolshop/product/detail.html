@@ -18,21 +18,24 @@
 
 		<h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
 <p class="price">${{ product.price }}</p>
-
 <div id="numericcontrol">
-	<form id="the_form" action="{% url 'cart:cart_add' product.id %}" method="post">
 
-		<a class="minus" href="#">-</a>
-		<a class="plus" href="#">+</a>	
-		<br>
-		<br>
-		<br>
-		<br>
-	<div align="right">
+	<form id="the_form" action="{% url 'cart:cart_add' product.id %}" method="post">
+			<a style="margin-right: 10px" class="minus" href="#">-</a>
+		
+			
 		{{ cart_product_form.quantity}}
-	{% csrf_token %}
-	<input type="submit" value="Agregar a la orden">
-	</div>
+		{% csrf_token %}
+		<a style="float: right;margin-right: 130px" class="plus" href="#">+</a>	
+		<br>
+		<br>
+		<br>
+		<input type="submit" value="Agregar a la orden">
+		<br>
+		<br>
+		<br>
+		<br>
+	
 
 
 </form>

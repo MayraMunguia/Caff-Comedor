@@ -1,6 +1,6 @@
 {% extends "coolshop/base.html" %}
 {% load static %}
-<link href="{% static 'css/base.css' %}" rel="stylesheet">
+	<link href="{% static 'css/base.css' %}" rel="stylesheet">
 {% block title %}
 {% if category %}{{ category.name }}{% else %}Products{% endif %}
 
@@ -8,52 +8,48 @@
 
 {% block content %}
 
-</div>
 <div id="main" class="product-list">
 	<br>
-<h1>{% if category %}{{ category.name }}{% else %}Seleccione una categoría:{% endif %}<a href="/"><img id="back" align="right" {% if not category %}style="display:none;padding-right:20px"{% else %}style="padding-right:20px;"{% endif %} src="{% static 'img/back.png' %}" width = "100" height = "100"/></a></h1>
+	<h1>{% if category %}{{ category.name }}{% else %}Seleccione una categoría:{% endif %}<a href="/"><img id="back" align="right" {% if not category %}style="display:none;padding-right:20px"{% else %}style="padding-right:20px;"{% endif %} src="{% static 'img/back.png' %}" width = "100" height = "100"/></a></h1>
 
-
-
-{% for c in categories %}
-	{% if not c.parent %}
-	<div {% if category %}style="display:none"{% endif%}class="item" >	
-		<a href="{{ c.get_absolute_url }}">
-		<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-	</a>
-	<button class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug %}class="selected"{% endif%}>
-	<a href="{{ c.get_absolute_url }}">{{ c.name }}</a><br>
-</button>
-	</div>
-{% endif %}
-
-{% endfor %}
-
-
-<div id= productos {% if not category %}style="display:none"{% endif%}>
-{% for product in products %}
-	<div class="item">
-		<a href="{{ product.get_absolute_url }}">
-		<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
-		</a>
-		<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-		${{ product.price }}
-	</div>
-{% endfor %}
- 	{% for c in categories %}
-		{% if c.parent %}
-			{% if category == c.parent %}
-				<div class="item">
-					<a href="{{ c.get_absolute_url }}">
-					<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% 	static 'img/no_image.png' %}{% endif %}"></a>
+	{% for c in categories %}
+		{% if not c.parent %}
+			<div {% if category %}style="display:none"{% endif%}class="item" >	
+				<a href="{{ c.get_absolute_url }}">
+					<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+				</a>
+				<button class="w3-button w3-xlarge w3-black" {% if category.slug == c.slug%}class="selected"{% endif%}>
 					<a href="{{ c.get_absolute_url }}">{{ c.name }}</a><br>
-				</div>
-			{% endif %}	
+				</button>
+			</div>
 		{% endif %}
 	{% endfor %}
 
-</div>
 
+	<div id= productos {% if not category %}style="display:none"{% endif%}>
+		{% for c in categories %}
+			{% if c.parent %}
+				{% if category == c.parent %}
+					<div class="item">
+						<a href="{{ c.get_absolute_url }}">
+							<img id="button" src="{% if c.image %}{{ c.image.url }}{% else %}{% 	static 'img/no_image.png' %}{% endif %}">
+						</a>
+						<a href="{{ c.get_absolute_url }}">{{ c.name }}</a><br>
+					</div>
+				{% endif %}	
+			{% endif %}
+		{% endfor %}
 
+		{% for product in products %}
+			<div class="item">
+				<a href="{{ product.get_absolute_url }}">
+					<img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+				</a>
+				<a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+				${{ product.price }}
+			</div>
+		{% endfor %}
+
+	</div>
 </div>
 {% endblock %}

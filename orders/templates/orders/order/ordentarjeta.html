@@ -12,7 +12,7 @@
 
 
 
-	<form action="." method="post" class="order-form">
+	<form action="." method="post" class="order-form" onsubmit="return checkvalue(this)">
 		<h5>Numero de Tarjeta:</h5>
 		{{ form.numerotarjeta |attr:"autofocus"}}
 		<p><input type="submit" value="Enviar Orden"></p>
@@ -21,33 +21,16 @@
 
 {% endblock %}
 
-
 {% block js %}
-
-<!--
 <script >
-$(document).ready(){
+	function checkvalue() { 
+    var mystring = document.getElementById('id_numerotarjeta').value; 
+    if(!mystring.match(/\S/)) {
+        alert ('Por favor ingrese su tarjeta.');
+        return false;
+    } else 
+        return true;
+    }
+</script>
 
-
-	function tarjetakeypress()
-	{
-		var numerotarjeta = document.getElementById("numerotarjeta");
-
-		if (numerotarjeta.value.length == 14) {
-			consultarDatosEmpleado(numerotarjeta)
-		}
-	}
-
-	function consultarDatosEmpleado(numerotarjeta){
-	$.ajax({
-  url: "ajax_datosUsuario",
-  data:{"numerotarjeta": numerotarjeta}
-}).done(function() {
-  var nombreinput = document.getElementById("id_nombre");
-  var numeroinput = document.getElementById("id_numeroempleado");
-  nombreinpt= request.data.nombre;
-
-});
-	}
-</script>-->
 {% endblock %}

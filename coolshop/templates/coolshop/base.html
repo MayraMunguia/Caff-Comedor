@@ -1,94 +1,69 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>{% block title %}Comedor{% endblock %}</title>
-<link href="{% static 'css/base.css' %}" rel="stylesheet">
-<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
-<script src="{% static 'js/jquery.numpad.js' %}"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-
-</head>
-<body>
-<div id="header">
-<a href="/" class="logo">
-<img src="{% static 'img/icon.png' %}"/>
-</a>
-
-
-</div>
-<!---<div id="subheader">
-
-
-<div class="cart">
-	{% with total_items=cart|length %}
-		{% if cart|length > 0 %}
-			Your Cart:
-			<a href="{% url 'cart:cart_detail' %}">
-				{{ total_items }} item{{ total_items|pluralize }},
-				${{ cart.get_total_price }}
+	<head>
+		<meta charset="utf-8" />
+		<title>{% block title %}Comedor{% endblock %}</title>
+		<link href="{% static 'css/base.css' %}" rel="stylesheet">
+		<script src="{% static 'js/jquery-3.2.1.js' %}"></script>
+		<script src="{% static 'js/jquery.numpad.js' %}"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	</head>
+	<body>
+		<div id="header">
+			<a href="/" class="logo">
+				<img src="{% static 'img/icon.png' %}"/>
 			</a>
-			{% else %}
-				Your Cart is empty.
-		{% endif %}
-	{% endwith %}
-</div>
-</div>-->
-
-
-<div id="sidebar" class="w3-panel w3-border-right w3-border-red">
-		<h1>Orden</h1>
-	<br>
-	<table class="w3-card-4" >
-		<thead>
-			<tr>
-				<th>Producto</th>
-				<th>Cantidad</th>
-				<th>Eliminar?</th>
-				<th>Precio</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in cart %}
-			 {% with product=item.product %}
-			<tr>
-				<td>{{ product.name }}</td>
-				<td>
-					<center>{{ item.quantity }}</center>
-				
-				</td>
-				<td><a href="{% url 'cart:cart_remove' product.id %}"><center><img src="{% static 'img/delete.png' %}"/></center></a></td>
-				<td class="num">${{ item.total_price }}</td>
-			</tr>
-			 {% endwith %}
-			{% endfor %}
-			<tr class="total">
-				<td>Total</td>
-				<td colspan="2"></td>
-				<td class="num">${{ cart.get_total_price }}</td>
-			</tr>
-		</tbody>
-	</table>
-	<p class="text-left">	
-		<a href="{% url 'orders:clear_session' %}" class="button">Cancelar Orden</a>
-		<a href="{% url 'orders:payment' %}" class="button">Enviar Orden</a>
-	</p>
+		</div>
+		<div id="sidebar" class="w3-panel w3-border-right w3-border-red">
+			<h1>Orden</h1>
+			<br>
+			<table class="w3-card-4" >
+				<thead>
+					<tr>
+						<th>Producto</th>
+						<th>Cantidad</th>
+						<th>Eliminar?</th>
+						<th>Precio</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in cart %}
+			 			{% with product=item.product %}
+							<tr>
+								<td>{{ product.name }}</td>
+								<td><center>{{ item.quantity }}</center></td>
+								<td><a href="{% url 'cart:cart_remove' product.id %}"><center><img src="{% static 'img/delete.png' %}"/></center></a></td>
+								<td class="num">${{ item.total_price }}</td>
+							</tr>
+			 			{% endwith %}
+					{% endfor %}
+					<tr class="total">
+						<td>Total</td>
+						<td colspan="2"></td>
+						<td class="num">${{ cart.get_total_price }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<p class="text-left">	
+				<a href="{% url 'orders:clear_session' %}" class="button">Cancelar Orden</a>
+				<a style="background:#5bc954;margin-left:90px" href="{% url 'orders:payment' %}" class="button">Enviar Orden</a>
+			</p>
 
 	
 
 
 
-</div>
+		</div>
+		<div id="content">
+			{% block content %}
 
-<div id="content">
-{% block content %}
-{% endblock %}
+			{% endblock %}
 
-{% block js%}
-{% endblock %}
-</div>
-</body>
+			{% block js%}
+		
+			{% endblock %}
+		</div>
+	</body>
 </html>

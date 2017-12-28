@@ -51,9 +51,7 @@ table {
     border-collapse: collapse; 
 }
 
-.table{
-    width:0%;
-}
+
 
 table th, table td {
     text-align:left;
@@ -192,7 +190,7 @@ ul.errorlist {
 
 #main {
     float:right;
-    width: 66%;
+    width: 100%;
     margin-left:-220px; 
     overflow:hidden;
 }
