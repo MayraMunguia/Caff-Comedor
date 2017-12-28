@@ -15,11 +15,39 @@
 	<form action="." method="post" class="order-form">
 		<h5>Numero de Tarjeta:</h5>
 		{{ form.numerotarjeta |attr:"autofocus"}}
-		<h5>Nombre del empleado:</h5>
-		{{ form.nombre | attr:"readonly"}}
-		<h5>Numero de empleado:</h5>
-		{{form.numeroempleado |attr:"readonly"}}
 		<p><input type="submit" value="Enviar Orden"></p>
 		{% csrf_token %}
 	</form>
+
+{% endblock %}
+
+
+{% block js %}
+
+<!--
+<script >
+$(document).ready(){
+
+
+	function tarjetakeypress()
+	{
+		var numerotarjeta = document.getElementById("numerotarjeta");
+
+		if (numerotarjeta.value.length == 14) {
+			consultarDatosEmpleado(numerotarjeta)
+		}
+	}
+
+	function consultarDatosEmpleado(numerotarjeta){
+	$.ajax({
+  url: "ajax_datosUsuario",
+  data:{"numerotarjeta": numerotarjeta}
+}).done(function() {
+  var nombreinput = document.getElementById("id_nombre");
+  var numeroinput = document.getElementById("id_numeroempleado");
+  nombreinpt= request.data.nombre;
+
+});
+	}
+</script>-->
 {% endblock %}

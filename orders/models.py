@@ -2,9 +2,9 @@ from django.db import models
 from coolshop.models import Product
 
 class Order(models.Model):
-	nombre= models.CharField(max_length=100, null=True)
-	numerotarjeta= models.CharField(max_length=20, null=True)
-	numeroempleado= models.CharField(max_length=20, null=True)
+	nombre= models.CharField(max_length=100, null=True, blank= True)
+	numerotarjeta= models.CharField(max_length=20, null=True, blank = True)
+	numeroempleado= models.CharField(max_length=20, null=True, blank = True)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	paid = models.BooleanField(default=False)
