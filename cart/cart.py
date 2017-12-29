@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from coolshop.models import Product
+from Comedor.models import Product
 from django.shortcuts import redirect
 
 class Cart(object):

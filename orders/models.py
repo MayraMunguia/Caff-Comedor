@@ -1,5 +1,5 @@
 from django.db import models
-from coolshop.models import Product
+from Comedor.models import Product
 
 class Order(models.Model):
 	nombre= models.CharField(max_length=100, null=True, blank= True)

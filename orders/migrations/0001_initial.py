@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coolshop', '0001_initial'),
+        ('Comedor', '0001_initial'),
     ]
 
     operations = [
@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(max_digits=10, decimal_places=2)),
                 ('quantity', models.PositiveIntegerField(default=1)),
                 ('order', models.ForeignKey(related_name='items', to='orders.Order')),
-                ('product', models.ForeignKey(related_name='order_items', to='coolshop.Product')),
+                ('product', models.ForeignKey(related_name='order_items', to='Comedor.Product')),
             ],
         ),
     ]

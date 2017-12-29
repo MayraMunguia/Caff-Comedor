@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coolshop', '0002_category_image'),
+        ('Comedor', '0002_category_image'),
     ]
 
     operations = [
@@ -22,12 +22,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='category',
             name='parent',
-            field=models.ForeignKey(blank=True, null=True, related_name='children', to='coolshop.Category'),
+            field=models.ForeignKey(blank=True, null=True, related_name='children', to='Comedor.Category'),
         ),
         migrations.AlterField(
             model_name='product',
             name='category',
-            field=models.ForeignKey(blank=True, null=True, related_name='products', to='coolshop.Category'),
+            field=models.ForeignKey(blank=True, null=True, related_name='products', to='Comedor.Category'),
         ),
         migrations.AlterUniqueTogether(
             name='category',

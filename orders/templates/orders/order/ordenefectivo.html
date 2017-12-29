@@ -1,4 +1,4 @@
-{% extends "coolshop/base.html" %}
+{% extends "Comedor/base.html" %}
 {% load static %}
 {% load widget_tweaks %}
 
@@ -10,11 +10,14 @@
 	<h1>Pago en Efectivo</h1>
 	<h3>Total a pagar de la orden: <p style=" font-weight: bold;">${{ cart.get_total_price}}</p></h3>
 	<h3>¿Con cuanto vas a pagar?</h3>
-	<form  action="." method="post" class="order-form" onsubmit="return checkvalue(this)">
+	<form  action="." method="post" class="order-form" onsubmit="return checkvalue(this),nonegativo(this)">
 		<br>
 		{{ form.Pago |attr:"autofocus"}}
 		<br>
 		<br>
+		{% if Pago < total %}
+		{% else %}
+		{% endif %}
 		<p><input type="submit" value="Enviar Orden"></p>
 		{% csrf_token %}
 	</form>
@@ -45,6 +48,19 @@
     			} else 
         			return true;
     			}
+    		function nonegativo() { 
+    			var mystring = document.getElementById('id_Pago').value;
+    			var min = {{ cart.get_total_price}};
+
+    			if(mystring < min) {
+        			alert ('La cantidad debe ser mayor que el total a pagar.');
+        			return false;
+    			} else 
+        			return true;
+    			}	
+
+
+
 		</script>
 	
 {% endblock %}

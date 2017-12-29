@@ -31,21 +31,24 @@ def order_create(request):
 		
 			db = MySQLdb.connect(user='root', db='test', passwd='t38l7b+a', host='localhost')
 			cursor = db.cursor()
-			cursor.execute('SELECT * FROM empleados WHERE numerotarjeta = "%s"' % numerotarjeta)
-			nombres = cursor.fetchall()
-			db.close()	
+			query = cursor.execute('SELECT * FROM empleados WHERE numerotarjeta = "%s"' % numerotarjeta)
+			if query > 0 :
+				nombres = cursor.fetchall()
+				db.close()	
 
-			order = form.save(commit = False)
-			order.nombre = str(nombres[0][0])
-			order.numeroempleado= str(nombres[0][1])  
-			order =  form.save()
-			nom = str(nombres[0][0]) 
-			total = cart.get_total_price()
-			for item in cart:
-				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
-			
-			cart.clear()
-			return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})
+				order = form.save(commit = False)
+				order.nombre = str(nombres[0][0])
+				order.numeroempleado= str(nombres[0][1])  
+				order =  form.save()
+				nom = str(nombres[0][0]) 
+				total = cart.get_total_price()
+				for item in cart:
+					OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
+				cart.clear()
+				return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})			
+			else:	
+				db.close()	
+				return render(request, 'orders/order/payment.html')
 
 		else:
 			return render(request,'orders/order/payment.html')
