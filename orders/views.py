@@ -3,6 +3,7 @@ from .models import OrderItem
 from .forms import OrderCreateForm, OrderCashForm
 from cart.cart import Cart
 import MySQLdb
+from django.contrib import messages
 
 	
 def order_create(request):
@@ -20,9 +21,7 @@ def order_create(request):
 			order = form.save()
 			for item in cart:
 				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
-			#clean the cart
 			cart.clear()
-			# launch asynchronous task
 			
 			return render(request, 'orders/order/createdEfectivo.html', {'order':order, 'cambio': cambio})
 		elif form.is_valid():
@@ -47,7 +46,8 @@ def order_create(request):
 				cart.clear()
 				return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})			
 			else:	
-				db.close()	
+				db.close()
+				messages.info(request, '! Tu numero de tarjeta no se encuentra en la base de datos, porfavor intenta denuevo.')	
 				return render(request, 'orders/order/payment.html')
 
 		else:

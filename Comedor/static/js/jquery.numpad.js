@@ -287,7 +287,7 @@
 		hideDecimalButton: false,
 		textDone: 'Finalizar',
 		textDelete: 'Eliminar',
-		textClear: 'Limpia',
+		textClear: 'Limpiar',
 		textCancel: 'Cancelar',
 		decimalSeparator: ',',
 		precision: null,

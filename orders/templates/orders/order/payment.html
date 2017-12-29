@@ -6,6 +6,13 @@
 
 {% block content %}
 
+{% if messages %}
+
+    {% for message in messages %}
+    <h3{% if message.tags %} class="{{ message.tags }}"{% endif %} style= "font-size: 16px;font-weight: bold;">{{ message }}</h3>
+    {% endfor %}
+{% endif %}
+
 	<h1>Forma de Pago</h1>
 	<h2>Por favor, seleccione la forma de pago que desee.</h2>
 
