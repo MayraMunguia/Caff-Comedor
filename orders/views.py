@@ -4,6 +4,7 @@ from .forms import OrderCreateForm, OrderCashForm
 from cart.cart import Cart
 import MySQLdb
 from django.contrib import messages
+import re
 
 	
 def order_create(request):
@@ -26,18 +27,21 @@ def order_create(request):
 			return render(request, 'orders/order/createdEfectivo.html', {'order':order, 'cambio': cambio})
 		elif form.is_valid():
 			data = form.cleaned_data	
-			numerotarjeta = data['numerotarjeta']
+			nt = data['numerotarjeta']
+			reg = re.search('(?<=\;)(.+?)(?=\?)', nt)
+			if reg:
+				numerotarjeta = reg.group(1)
 		
 			db = MySQLdb.connect(user='root', db='test', passwd='t38l7b+a', host='localhost')
 			cursor = db.cursor()
-			query = cursor.execute('SELECT * FROM empleados WHERE numerotarjeta = "%s"' % numerotarjeta)
+			query = cursor.execute('SELECT * FROM empleados WHERE Tarjeta = "%s"' % numerotarjeta)
 			if query > 0 :
 				nombres = cursor.fetchall()
 				db.close()	
 
 				order = form.save(commit = False)
-				order.nombre = str(nombres[0][0])
-				order.numeroempleado= str(nombres[0][1])  
+				order.nombre = str(nombres[0][0] + " "+ nombres[0][2]+" "+ nombres[0][1])
+				order.numeroempleado= str(nombres[0][3])  
 				order =  form.save()
 				nom = str(nombres[0][0]) 
 				total = cart.get_total_price()
