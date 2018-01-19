@@ -2,12 +2,13 @@ from django.db import models
 from Comedor.models import Product
 
 class Order(models.Model):
-	nombre= models.CharField(max_length=100, null=True, blank= True)
-	numerotarjeta= models.CharField(max_length=20, null=True, blank = True)
+	nombre= models.CharField(max_length=100, null=True, blank= True, default='Invitado')
+	numerotarjeta= models.CharField(max_length=20, null=True, blank = True, default='')
 	numeroempleado= models.CharField(max_length=20, null=True, blank = True)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)
 	paid = models.BooleanField(default=False)
+	totalcompra = models.PositiveIntegerField(default=0)
 
 	class Meta:
 		ordering = ('-created',)

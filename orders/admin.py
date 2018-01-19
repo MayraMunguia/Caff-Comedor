@@ -8,7 +8,7 @@ class OrderItemInline(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-	list_display = ['id','numerotarjeta', 'nombre', 'numeroempleado']
+	list_display = ['id','numerotarjeta', 'nombre', 'numeroempleado', 'totalcompra']
 	list_filter= ['paid', 'created', 'updated', 'numeroempleado']
 	inlines = [OrderItemInline]
 	

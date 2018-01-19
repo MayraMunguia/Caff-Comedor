@@ -14,14 +14,18 @@ def order_create(request):
 		form2 = OrderCashForm(request.POST)
 		if form2.is_valid():
 			data = form2.cleaned_data
-			
+			order = form.save(commit = False)
 			pago = data['Pago']
 			total = cart.get_total_price()
 			cambio = pago - total 
+			order.totalcompra = cart.get_total_price()
 			
-			order = form.save()
 			for item in cart:
+				if str(item['product']) == 'Comida del dia':
+					#order.totalcompra = order.totalcompra + 6
+					#item['price'] = 42
 				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
+			order = form.save()
 			cart.clear()
 			
 			return render(request, 'orders/order/createdEfectivo.html', {'order':order, 'cambio': cambio})
@@ -41,17 +45,21 @@ def order_create(request):
 
 				order = form.save(commit = False)
 				order.nombre = str(nombres[0][0] + " "+ nombres[0][2]+" "+ nombres[0][1])
-				order.numeroempleado= str(nombres[0][3])  
+				order.numeroempleado= str(nombres[0][3])
+				order.totalcompra =  cart.get_total_price()
+				order.numerotarjeta= numerotarjeta
 				order =  form.save()
 				nom = str(nombres[0][0]) 
 				total = cart.get_total_price()
 				for item in cart:
 					OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
+					
+
 				cart.clear()
 				return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})			
 			else:	
 				db.close()
-				messages.info(request, '! Tu numero de tarjeta no se encuentra en la base de datos, porfavor intenta denuevo.')	
+				messages.info(request, 'Tu numero de tarjeta no se encuentra en la base de datos, porfavor intenta denuevo.')	
 				return render(request, 'orders/order/payment.html')
 
 		else:
