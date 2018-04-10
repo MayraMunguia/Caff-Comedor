@@ -1,6 +1,6 @@
 from decimal import Decimal
 from django.conf import settings
-from Comedor.models import Product
+from comedor.models import Product
 from django.shortcuts import redirect
 
 

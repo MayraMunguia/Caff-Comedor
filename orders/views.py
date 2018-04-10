@@ -4,11 +4,11 @@ from .forms import OrderCreateForm, OrderCashForm
 from cart.cart import Cart
 import MySQLdb
 from django.contrib import messages
-from django.template.loader import render_to_string
-import weasyprint
-from weasyprint import HTML, CSS
-import win32api
-import win32print
+#from django.template.loader import render_to_string
+#import weasyprint
+#from weasyprint import HTML, CSS
+#import win32api
+#import win32print
 import re
 
 	
@@ -32,7 +32,7 @@ def order_create(request):
 				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
 			
 			cart.clear()
-			
+			#imprimir(cart,order)
 			return render(request, 'orders/order/createdEfectivo.html', {'order':order, 'cambio': cambio})
 		elif form.is_valid():
 			data = form.cleaned_data	
@@ -67,7 +67,7 @@ def order_create(request):
 					OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
 					
 				cart.clear()
-				imprimir(cart,order)
+				#imprimir(cart,order)
 				return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})			
 			else:	
 				db.close()
@@ -95,11 +95,11 @@ def clear_session(request):
 def payment(request):
 	return render(request,'orders/order/payment.html')
 	
-def imprimir(cart, order):
-	html_string = render_to_string("orders/order/ticketTarjeta.html",{'cart':cart,"order": order})
-	html= HTML(string= html_string)
-	result = html.write_pdf("ticket.pdf")
-
-	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
-	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
+#def imprimir(cart, order):
+#	html_string = render_to_string("orders/order/ticketTarjeta.html",{'cart':cart,"order": order})
+#	html= HTML(string= html_string)
+#	result = html.write_pdf("ticket.pdf")
+#
+#	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
+#	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
 

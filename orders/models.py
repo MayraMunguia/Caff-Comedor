@@ -1,5 +1,5 @@
 from django.db import models
-from Comedor.models import Product
+from comedor.models import Product
 from datetime import datetime
 
 

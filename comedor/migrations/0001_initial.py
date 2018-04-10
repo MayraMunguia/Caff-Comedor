@@ -36,7 +36,7 @@ class Migration(migrations.Migration):
                 ('available', models.BooleanField(default=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(related_name='products', to='Comedor.Category')),
+                ('category', models.ForeignKey(related_name='products', to='comedor.Category')),
             ],
             options={
                 'ordering': ('name',),

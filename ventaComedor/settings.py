@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = (
     'django.contrib.admin',
-    'djcelery',
     'kombu.transport.django',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,12 +40,11 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    'rest_framework',
-    'Comedor',
+    'comedor',
     'cart',
     'orders',
     'reportes',
-    'ventanaordenes', 
+    'ventanaOrdenes',
 
 )
 
@@ -61,7 +59,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.security.SecurityMiddleware',
 )
 
-ROOT_URLCONF = 'VentaComedor.urls'
+ROOT_URLCONF = 'ventaComedor.urls'
 
 TEMPLATES = [
     {
@@ -82,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'VentaComedor.wsgi.application'
+WSGI_APPLICATION = 'ventaComedor.wsgi.application'
 
 
 # Database

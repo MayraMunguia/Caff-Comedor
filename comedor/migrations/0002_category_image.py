@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Comedor', '0001_initial'),
+        ('comedor', '0001_initial'),
     ]
 
     operations = [

@@ -25,7 +25,7 @@ class Category(models.Model):
 		return ' -> '.join(full_path[::-1])
 
 	def get_absolute_url(self):
-		return reverse('VentaComedor:product_list_by_category', args=[self.slug])
+		return reverse('ventaComedor:product_list_by_category', args=[self.slug])
 
 			
 class Product(models.Model):
@@ -48,6 +48,6 @@ class Product(models.Model):
 		return self.name
 	
 	def get_absolute_url(self):
-		return reverse('VentaComedor:product_detail', args=[self.id, self.slug])
+		return reverse('ventaComedor:product_detail', args=[self.id, self.slug])
 
 

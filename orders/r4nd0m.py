@@ -1,15 +1,15 @@
 import sys
 sys.path.append(r'C:\Users\Mayra Munguia\Desktop\PyProjects\VentaComedor')
-from VentaComedor import settings
+from ventaComedor import settings
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "VentaComedor.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ventaComedor.settings")
 import random
 import time
 from django.db import connection
 import json
 from math import *
 #from cart.cart import Cart
-#from Comedor.models import Product
+#from comedor.models import Product
 #from django.test import RequestFactory
 
 #request = None
@@ -32,7 +32,7 @@ while (time.clock() - start) < 1200:
 	print('funciona')
 	cursor.close()
 	
-	#enviar un response a ventanaordenes/templates	
+	#enviar un response a ventanaOrdenes/templates
 
 
 
