@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-lg-12">
+        <br>
+        <br>
+        <br>
+
+        <h1 class="page-header">El empleado no se encuentra en la base de datos.</h1>
+        <h4>Por favor ingrese otro número.</h4>
+    </div>    
+</div>
+
+<br>
+<!--<form method="get" action="{% url 'reportes:buscaempleado' %}">
+<div class="input-group">
+      <input type="text" name="search" class="form-control" placeholder="Busca por # de empleado" aria-label="Search" onkeypress="return isNumber(event)">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="submit">Buscar</button>
+      </span>
+    </div>
+     </form>
+
+-->
+
+{% endblock cuerpo %}
+{% block js %}
+
+{% endblock js %}

@@ -16,16 +16,16 @@ def order_create(request):
 			data = form2.cleaned_data
 			order = form.save(commit = False)
 			pago = data['Pago']
-			total = cart.get_total_price()
+			total = cart.descuento_iva()
 			cambio = pago - total 
-			order.totalcompra = cart.get_total_price()
-			
-			for item in cart:
-				if str(item['product']) == 'Comida del dia':
-					#order.totalcompra = order.totalcompra + 6
-					#item['price'] = 42
-				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
+			order.totalcompra = cart.descuento_iva()
 			order = form.save()
+
+
+
+			for item in cart:
+				OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
+			
 			cart.clear()
 			
 			return render(request, 'orders/order/createdEfectivo.html', {'order':order, 'cambio': cambio})
@@ -46,15 +46,21 @@ def order_create(request):
 				order = form.save(commit = False)
 				order.nombre = str(nombres[0][0] + " "+ nombres[0][2]+" "+ nombres[0][1])
 				order.numeroempleado= str(nombres[0][3])
+				order.nomina= str(nombres[0][5])
+				order.razon_social= str(nombres[0][6])
+				order.sucursal= str(nombres[0][7])
+				order.area= str(nombres[0][8])
+				order.segmento= str(nombres[0][9])
+				order.correo= str(nombres[0][10])
 				order.totalcompra =  cart.get_total_price()
 				order.numerotarjeta= numerotarjeta
 				order =  form.save()
 				nom = str(nombres[0][0]) 
 				total = cart.get_total_price()
 				for item in cart:
+					
 					OrderItem.objects.create(order=order,product= item['product'], price = item['price'], quantity=item['quantity'])
 					
-
 				cart.clear()
 				return render(request, 'orders/order/createdTarjeta.html', {'nombre':nom, 'total':total})			
 			else:	

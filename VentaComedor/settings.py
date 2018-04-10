@@ -30,8 +30,11 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+
 INSTALLED_APPS = (
     'django.contrib.admin',
+    'djcelery',
+    'kombu.transport.django',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,7 +45,8 @@ INSTALLED_APPS = (
     'Comedor',
     'cart',
     'orders',
-    'report_builder',
+    'reportes',
+    'ventanaordenes', 
 
 )
 
@@ -84,26 +88,39 @@ WSGI_APPLICATION = 'VentaComedor.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test',
+        'USER': 'root',
+        'PASSWORD': 't38l7b+a',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    },
+#}
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Hermosillo'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
-USE_TZ = True
+USE_TZ = False
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -113,6 +130,8 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL='/'
 CART_SESSION_ID = 'cart'
-SESSION_COOKIE_AGE = 10
+SESSION_COOKIE_AGE = 60
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

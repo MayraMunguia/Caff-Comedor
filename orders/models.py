@@ -1,11 +1,19 @@
 from django.db import models
 from Comedor.models import Product
+from datetime import datetime
+
 
 class Order(models.Model):
 	nombre= models.CharField(max_length=100, null=True, blank= True, default='Invitado')
-	numerotarjeta= models.CharField(max_length=20, null=True, blank = True, default='')
-	numeroempleado= models.CharField(max_length=20, null=True, blank = True)
-	created = models.DateTimeField(auto_now_add=True)
+	numerotarjeta= models.CharField(max_length=20, null=True, blank = True)
+	numeroempleado= models.CharField(max_length=20, null=True, blank = True, default='-')
+	nomina= models.CharField(max_length=50, null=True, blank = True, default='-')
+	razon_social= models.CharField(max_length=50, null=True, blank = True, default='-')
+	sucursal = models.CharField(max_length=50, null=True, blank = True, default='-')
+	area= models.CharField(max_length=50, null=True, blank = True, default='-')
+	segmento= models.CharField(max_length=50, null=True, blank = True, default='-')
+	correo= models.CharField(max_length=50, null=True, blank = True, default='-')
+	created = models.DateTimeField(default= datetime.now)
 	updated = models.DateTimeField(auto_now=True)
 	paid = models.BooleanField(default=False)
 	totalcompra = models.PositiveIntegerField(default=0)

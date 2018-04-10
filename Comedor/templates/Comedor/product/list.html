@@ -10,7 +10,7 @@
 
 <div id="main" class="product-list">
 	<br>
-	<h1>{% if category %}{{ category.name }}{% else %}Seleccione una categoría:{% endif %}<a href="/"><img id="back" align="right" {% if not category %}style="display:none;padding-right:20px"{% else %}style="padding-right:20px;"{% endif %} src="{% static 'img/back.png' %}" width = "100" height = "100"/></a></h1>
+	<h1>{% if category %}{{ category.name }}{% else %}Seleccione una categoría:{% endif %}<a href="javascript:history.go(-1)"><img id="back" align="right" {% if not category %}style="display:none;padding-right:20px"{% else %}style="padding-right:20px;"{% endif %} src="{% static 'img/back.png' %}" width = "100" height = "100"/></a></h1>
 
 	{% for c in categories %}
 		{% if not c.parent %}

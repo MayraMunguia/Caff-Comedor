@@ -8,9 +8,10 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^orders/', include('orders.urls', namespace='orders')),
+    url(r'^ventanaordenes/', include('ventanaordenes.urls', namespace='ventanaordenes')),
+    url(r'^reportes/', include('reportes.urls', namespace='reportes')),
     url(r'^', include('Comedor.urls', namespace='VentaComedor')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^report_builder/', include(report_builder.urls)),
 ]
 
 if settings.DEBUG:

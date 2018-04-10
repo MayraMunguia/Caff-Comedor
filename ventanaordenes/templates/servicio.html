@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+ <script src="{% static "js/jquery-3.2.1.js" %}"></script>
+
+<script type="text/javascript">  
+    $( document ).ready(function() {
+       setInterval(function(){
+            $.getJSON('{% url 'ventanaordenes:update' %}',
+                    function (data) {
+                        var tr;
+                         $('#ords').html("");
+                        for (var i = 0; i < data.length; i++) {
+
+                            tr = $('<div style="background-color:red; display: table-cell; padding: 20px;">');
+                            tr.append("<h1 style='color:white;'>" + "Orden #" + JSON.stringify(data[i].orden) + "</h1>");
+                            tr.append("<h2 style='color:white;'>" + JSON.stringify(data[i].nombre) + "</h2>");
+                            tr.append("<h4 style='color:white;'>" + "Total: $" + JSON.stringify(data[i].total) + "</h4>");
+                            
+                           	tr.append("<h4 style='color:white;display: inline;'>" + JSON.stringify(data[i].producto) + "</h4>");
+                             $('#ords').append(tr);
+
+                        }
+                    });
+       },2000);
+    });
+
+</script>
+
+<head>
+  <style>
+h1 { 
+    font-size: 40px;
+}
+h2 { 
+    font-size: 30px;
+}
+h4 { 
+    font-size: 21px;
+}
+</style>
+	<title></title>
+</head>
+<body background="{% static "img/caff.png" %}" style="background-position: center; background-repeat: no-repeat">
+		<div id="ords" style="background-color: black; opacity: 0.55; height: 1050px; width: 100%;  display: table; border-spacing: 10px;">
+			{% for orden in ordenes %}
+   				<div  style="background-color:red; display: table-cell; padding: 20px; height: 100%">
+   					
+
+   					<tr>
+                                    
+                                    <h1 style="color:white;"> Orden # {{ orden.2 }}</h1>
+                                    <h2 style="color:white;display: inline;">{{ orden.0 }} </h2>
+                                    <h4 style="color:white;">Total de compra: ${{ orden.1 }}</h4>
+                                    <h4 style="color:white;display: inline;">{{ orden.3 }}</h4>
+                                    <h4 style="color:white;display: inline;"> x {{ orden.4 }}</h4>
+
+
+                                </tr>
+   				</div>
+    		{% endfor %}
+
+		</div>
+</body>
+</html>

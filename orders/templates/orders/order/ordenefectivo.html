@@ -8,9 +8,26 @@
 
 {% block content %}
 	<h1>Pago en Efectivo</h1>
-	<h3>Total a pagar de la orden: <p style=" font-weight: bold;">${{ cart.get_total_price}}</p></h3>
+	{% for item in cart %}
+	{% with product=item.product %}
+	{% if product.name == 'Comida del dia' %}
+
+		<strong><p style="color: red;">Al comprar con efectivo, el precio de la Comida del día aumenta en un 16%. 
+		</p></strong>
+			
+
+	
+	{% endif %}
+						
+	{% endwith %}
+	
+	{% endfor %}
+
+
+	<h3>Total a pagar de la orden: <p style=" font-weight: bold;">${{cart.descuento_iva}}</p></h3>
 	<h3>¿Con cuanto vas a pagar?</h3>
-	<form  action="." method="post" class="order-form" onsubmit="return checkvalue(this),nonegativo(this)">
+
+	<form  action="." method="post" class="order-form" onsubmit="return checkvalue(this) && nonegativo(this)">
 		<br>
 		{{ form.Pago |attr:"autofocus"}}
 		<br>

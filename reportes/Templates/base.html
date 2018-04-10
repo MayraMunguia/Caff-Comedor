@@ -1,0 +1,98 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">    
+    <link rel="stylesheet" type="text/css" href="{% static "css/jquery.dataTables.min.css"  %}"  />
+    <script src="{% static "js/jquery-3.2.1.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/jquery.dataTables.min.js" %}"></script>
+
+    <title>Reportes Caffenio Comedor</title>
+
+
+  </head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{% url 'reportes:reportes'%}">Reportes Comedor </a>
+
+
+<form class="form-control" style=" background-color:rgba(0,0,0,0) !important; border: 0px !important;"  method="get" action="{% url 'reportes:buscaempleado' %}">
+<div class="input-group">
+      <input type="text" name="search" class="form-control" placeholder="Busca por # de empleado" aria-label="Search" onkeypress="return isNumber(event)">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="submit">Buscar</button>
+      </span>
+    </div>
+     </form>
+
+      
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+       <a class="nav-link" href="/reportes/cerrar">Salir</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Reportes</span>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'reportes:reportes'%}">
+                  <span data-feather="file-text"></span>
+                    Gasto por empleado <span class="sr-only">(current)</span>
+                </a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="{% url 'reportes:reportecomedor' %}">
+                  <span data-feather="file-text"></span>
+                  Total producto vendido
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      
+         
+            {% block cuerpo %}
+        {% endblock cuerpo %}
+            <!---aqui va el reporte -->
+
+        </main>
+      </div>
+    </div>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+      feather.replace()
+    </script>
+    <script type="text/javascript">     
+function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ( (charCode > 31 && charCode < 48) || charCode > 57) {
+            return false;
+        }
+        return true;
+    }
+</script>
+    {% block js %}
+
+    {% endblock js %}
+  </body>
+</html>

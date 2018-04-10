@@ -10,7 +10,6 @@ class Cart(object):
 			
 		cart=self.session.get(settings.CART_SESSION_ID)
 		if not cart:
-			#save an empty cart in the session
 			cart= self.session[settings.CART_SESSION_ID]  = {}
 		self.cart = cart
 
@@ -60,10 +59,18 @@ class Cart(object):
 
 		return sum(item['quantity'] for item in self.cart.values())
 
-
 	def get_total_price(self):
 
 		return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+
+	def descuento_iva(self):
+		product_id = str(20)
+
+		if product_id in self.cart:
+			return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values()) +  7
+		else: 
+			return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
 
 	def clear(self):
