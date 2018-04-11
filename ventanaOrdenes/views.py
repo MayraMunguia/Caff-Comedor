@@ -18,11 +18,10 @@ def servicio(request):
 
 def update(request):
 	cursor = connection.cursor()
-	query = cursor.execute('SELECT b.nombre, b.totalcompra, a.order_id,'+
-		'CONCAT(C.name, " x " ,a.quantity) AS productos '+
-		'FROM orders_order b JOIN orders_orderitem a JOIN comedor_product c '+
-		'WHERE a.product_id = c.id AND b.id = a.order_id '+
-		'AND (TIMESTAMPDIFF(SECOND, b.created, now()) <= 60) ORDER BY b.created DESC LIMIT 8;')
+	query = cursor.execute('select b.nombre, b.totalcompra, a.order_id, c.name, a.quantity'+
+	' FROM orders_order b JOIN orders_orderitem a JOIN comedor_product c '+
+	'WHERE a.product_id = c.id AND b.id = a.order_id AND (TIMESTAMPDIFF(SECOND, b.created, now()) <= 60)'+
+	' ORDER BY b.created DESC LIMIT 8;')
 	ordenes = cursor.fetchall()
 	keys = ('nombre','total', 'orden', 'producto',)
 	result = []
