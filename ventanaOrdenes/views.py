@@ -22,7 +22,7 @@ def update(request):
 		'CONCAT(C.name, " x " ,a.quantity) AS productos '+
 		'FROM orders_order b JOIN orders_orderitem a JOIN comedor_product c '+
 		'WHERE a.product_id = c.id AND b.id = a.order_id '+
-		'  ORDER BY b.created DESC LIMIT 8;')
+		'AND (TIMESTAMPDIFF(SECOND, b.created, now()) <= 60) ORDER BY b.created DESC LIMIT 8;')
 	ordenes = cursor.fetchall()
 	keys = ('nombre','total', 'orden', 'producto',)
 	result = []

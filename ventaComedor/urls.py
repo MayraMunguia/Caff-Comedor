@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'^orders/', include('orders.urls', namespace='orders')),
-    url(r'^ventanaOrdenes/', include('ventanaOrdenes.urls', namespace='ventanaOrdenes')),
+    url(r'^ventanaordenes/', include('ventanaOrdenes.urls', namespace='ventanaordenes')),
     url(r'^reportes/', include('reportes.urls', namespace='reportes')),
     url(r'^', include('comedor.urls', namespace='ventaComedor')),
 ]
