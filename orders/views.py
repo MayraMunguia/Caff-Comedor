@@ -40,6 +40,13 @@ def order_create(request):
 		elif form.is_valid():
 			data = form.cleaned_data	
 			nt = data['numerotarjeta']
+			total = cart.get_total_price()
+			if total == 0:
+				messages.info(request, 'Tu orden no puede estar vacía')	
+				return redirect('/../../')
+			if len(nt) > 16 or len(nt) < 16:
+				messages.info(request, 'Ingresaste una tarjeta no válida.')	
+				return redirect('../pay')
 			reg = re.search('(?<=\;)(.+?)(?=\?)', nt)
 			if reg:
 				numerotarjeta = reg.group(1)
