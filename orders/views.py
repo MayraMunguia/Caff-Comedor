@@ -24,7 +24,7 @@ def order_create(request):
 			total = cart.descuento_iva()
 			if total == 0:
 				messages.info(request, 'Tu orden no puede estar vacía')	
-				return redirect('/../../')
+				return redirect('../pay/')
 			cambio = pago - total 
 			order.totalcompra = cart.descuento_iva()
 			order = form.save()
@@ -43,10 +43,10 @@ def order_create(request):
 			total = cart.get_total_price()
 			if total == 0:
 				messages.info(request, 'Tu orden no puede estar vacía')	
-				return redirect('/../../')
+				return redirect('../pay/')
 			if len(nt) > 16 or len(nt) < 16:
 				messages.info(request, 'Ingresaste una tarjeta no válida.')	
-				return redirect('../pay')
+				return redirect('../pay/')
 			reg = re.search('(?<=\;)(.+?)(?=\?)', nt)
 			if reg:
 				numerotarjeta = reg.group(1)
