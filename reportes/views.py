@@ -119,7 +119,7 @@ def ReporteTotalExcel(request):
 		desde= request.session['Desde']
 		hasta= request.session['Hasta']
 		cursor = connection.cursor()
-		query = cursor.execute('select nombre, numerotarjeta, numeroempleado,nomina, razon_social, SUM(totalcompra) As total from orders_order where created >"%s" AND created < "%s" group by nombre' % (desde , hasta))
+		query = cursor.execute('select nombre, numerotarjeta, numeroempleado,nomina, razon_social,area,segmento,sucursal,correo, SUM(totalcompra) As total from orders_order where created >"%s" AND created < "%s" group by nombre' % (desde , hasta))
 		reportes = cursor.fetchall()
 		wb = Workbook()
 		ws = wb.active
@@ -129,8 +129,12 @@ def ReporteTotalExcel(request):
 		ws['C3'] = 'NUMERO TARJETA'
 		ws['D3'] = 'NUMERO EMPLEADO'
 		ws['E3'] = 'NOMINA'
-		ws['F3'] = 'RAZON SOCIAL'  
-		ws['G3'] = 'TOTAL DE COMPRA'         
+		ws['F3'] = 'RAZON SOCIAL'
+		ws['G3'] = 'AREA' 
+		ws['H3'] = 'SEGMENTO' 
+		ws['I3'] = 'SUCURSAL'
+		ws['J3'] = 'CORREO'    
+		ws['K3'] = 'TOTAL DE COMPRA'         
 		cont=4
 
 		for reporte in reportes:
@@ -140,6 +144,10 @@ def ReporteTotalExcel(request):
 			ws.cell(row=cont,column=5).value = reporte[3]
 			ws.cell(row=cont,column=6).value = reporte[4]
 			ws.cell(row=cont,column=7).value = reporte[5]
+			ws.cell(row=cont,column=8).value = reporte[6]
+			ws.cell(row=cont,column=9).value = reporte[7]
+			ws.cell(row=cont,column=10).value = reporte[8]
+			ws.cell(row=cont,column=11).value = reporte[9]
 			
 			cont = cont + 1
 
