@@ -25,7 +25,7 @@ SECRET_KEY = '5ij%wdqaocbne&c-)i(#3-uk+^cuqcr76q(!%g=n2a(s1therg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '']
 
 
 # Application definition
@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'ventaComedor.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test',
-        'USER': 'root',
-        'PASSWORD': 't38l7b+a',
+        'NAME': 'comedordb',
+        'USER': 'admincomedor',
+        'PASSWORD': 't38l7b++',
         'HOST': 'localhost',
         'PORT': '',
     }
