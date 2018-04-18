@@ -124,3 +124,4 @@ def imprimir(cart, order):
 		file = "ticket.pdf"
 		printer_name=printers.keys()[0]
 		conn.printFile (printer_name, file, "Ticket", {})
+		conn.printFile (printer_name, file, "Ticket2", {})
