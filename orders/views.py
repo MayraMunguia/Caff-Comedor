@@ -7,9 +7,15 @@ from django.contrib import messages
 from django.template.loader import render_to_string
 import weasyprint
 from weasyprint import HTML, CSS
-import win32api
-import win32print
+import os
 import re
+if os.name == 'nt':
+	import win32api
+	import win32print
+else:
+	import cups
+
+
 
 	
 def order_create(request):
@@ -109,6 +115,12 @@ def imprimir(cart, order):
 	html= HTML(string= html_string)
 	result = html.write_pdf("ticket.pdf")
 
-	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
-	win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
-
+	if os.name == 'nt':
+		win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)
+		win32api.ShellExecute(0,"print","ticket.pdf", None ,".",0)		
+	else:
+		conn = cups.Connection()
+		printers = conn.getPrinters()
+		file = "ticket.pdf"
+		printer_name=printers.keys()[0]
+		conn.printFile (printer_name, file, "Ticket", {})
